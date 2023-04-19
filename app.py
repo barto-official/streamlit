@@ -27,6 +27,7 @@ st.set_page_config(
 redirect_uri = 'https://barto-official-streamlit-app-l7dta8.streamlit.app'
 scope = 'user-read-playback-state,user-modify-playback-state,user-read-private'
 
+
 sp_oauth = SpotifyOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri, scope=scope)
 token_info = None #sp_oauth.get_cached_token()
 if not token_info:
@@ -38,10 +39,7 @@ if not token_info:
         code = sp_oauth.parse_response_code(response_url)
         token_info = sp_oauth.get_access_token(code)
 
-        access_token = token_info['access_token']
-        sp = spotipy.Spotify(auth=access_token)
-
-
+access_token = token_info['access_token']
 sp = spotipy.Spotify(auth=access_token)
 
 
