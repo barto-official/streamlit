@@ -11,10 +11,9 @@ from IPython.display import display, Javascript
 from urllib.parse import quote
 
 
-#client_id = 'fe29fbb9fa7f4cf4b88ebf90faaeb562'
-#client_secret = '4a50ecae553e45d8b80f0cb1a3fe92d9'
-#redirect_uri = 'http://localhost:8000/callback'
-#scope = 'user-read-playback-state,user-modify-playback-state,user-read-private'
+client_id = 'fe29fbb9fa7f4cf4b88ebf90faaeb562'
+client_secret = '4a50ecae553e45d8b80f0cb1a3fe92d9'
+
 
 #client_credentials_manager = SpotifyClientCredentials(client_id='fe29fbb9fa7f4cf4b88ebf90faaeb562', client_secret='4a50ecae553e45d8b80f0cb1a3fe92d9')
 #sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -23,7 +22,7 @@ redirect_uri = 'https://barto-official-streamlit-app-l7dta8.streamlit.app'
 scope = 'user-read-playback-state,user-modify-playback-state,user-read-private'
 
 sp_oauth = SpotifyOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri, scope=scope)
-token_info = sp_oauth.get_cached_token()
+token_info = None #sp_oauth.get_cached_token()
 if not token_info:
     auth_url = sp_oauth.get_authorize_url()
     st.write(f"Please log in to Spotify using this URL: {auth_url}")
