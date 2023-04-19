@@ -1,0 +1,6 @@
+streamlit
+spotipy
+requests
+spotipy
+IPython
+urllib

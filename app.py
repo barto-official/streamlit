@@ -2,7 +2,6 @@ import streamlit as st
 import spotipy
 import requests
 import spotipy.util as util
-# Import the HTML module to embed an iframe
 from streamlit.components.v1 import html
 from spotipy.oauth2 import SpotifyOAuth
 # Authenticate with Spotify API
