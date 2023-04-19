@@ -70,7 +70,6 @@ def play_track(access_token, track_uri):
         st.write(f"Failed to start playing the track. Status code: {response.status_code}")
 
 # Streamlit app code
-st.set_page_config(page_title="Spotify Artist Search", page_icon=":musical_note:", layout="wide")
 st.markdown(
     """
     <style>
