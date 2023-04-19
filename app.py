@@ -11,8 +11,7 @@ from IPython.display import display, Javascript
 from urllib.parse import quote
 
 
-client_id = 'fe29fbb9fa7f4cf4b88ebf90faaeb562'
-client_secret = '4a50ecae553e45d8b80f0cb1a3fe92d9'
+
 
 # Set page configuration
 st.set_page_config(
@@ -20,6 +19,16 @@ st.set_page_config(
     page_icon=":musical_note:",
     layout="wide"
 )
+
+import os
+
+# Delete cache file if it exists
+cache_path = f".cache-{client_id}"
+if os.path.exists(cache_path):
+    os.remove(cache_path)
+    
+client_id = 'fe29fbb9fa7f4cf4b88ebf90faaeb562'
+client_secret = '4a50ecae553e45d8b80f0cb1a3fe92d9'
 
 #client_credentials_manager = SpotifyClientCredentials(client_id='fe29fbb9fa7f4cf4b88ebf90faaeb562', client_secret='4a50ecae553e45d8b80f0cb1a3fe92d9')
 #sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
