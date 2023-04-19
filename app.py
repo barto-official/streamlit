@@ -30,11 +30,15 @@ scope = 'user-read-playback-state,user-modify-playback-state,user-read-private'
 sp_oauth = SpotifyOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri, scope=scope)
 token_info = None #sp_oauth.get_cached_token()
 if not token_info:
-    auth_url = sp_oauth.get_authorize_url()
-    st.write(f"Please log in to Spotify using this URL: {auth_url}")
-    response_url = st.text_input("Enter the URL you were redirected to:")
-    code = sp_oauth.parse_response_code(response_url)
-    token_info = sp_oauth.get_access_token(code)
+    if st.button("Log in with Spotify"):
+        auth_url = sp_oauth.get_authorize_url()
+        st.write(f"Please log in to Spotify using this URL: {auth_url}")
+        response_url = st.text_input("Enter the URL you were redirected to:")
+        code = sp_oauth.parse_response_code(response_url)
+        token_info = sp_oauth.get_access_token(code)
+
+        access_token = token_info['access_token']
+        sp = spotipy.Spotify(auth=access_token)
 
 access_token = token_info['access_token']
 
