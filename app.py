@@ -19,7 +19,7 @@ scope = 'user-read-playback-state,user-modify-playback-state,user-read-private'
 #client_credentials_manager = SpotifyClientCredentials(client_id='fe29fbb9fa7f4cf4b88ebf90faaeb562', client_secret='4a50ecae553e45d8b80f0cb1a3fe92d9')
 #sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-redirect_uri = 'https://barto-official-streamlit-app-l7dta8.streamlit.app/'
+redirect_uri = 'https://barto-official-streamlit-app-l7dta8.streamlit.app/callback'
 scope = 'user-read-playback-state,user-modify-playback-state,user-read-private'
 
 sp_oauth = SpotifyOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri, scope=scope)
