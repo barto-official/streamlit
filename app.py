@@ -11,8 +11,8 @@ from IPython.display import display, Javascript
 from urllib.parse import quote
 
 
-client_id = 'fe29fbb9fa7f4cf4b88ebf90faaeb562'
-client_secret = '4a50ecae553e45d8b80f0cb1a3fe92d9'
+#client_id = 'fe29fbb9fa7f4cf4b88ebf90faaeb562'
+#client_secret = '4a50ecae553e45d8b80f0cb1a3fe92d9'
 #redirect_uri = 'http://localhost:8000/callback'
 #scope = 'user-read-playback-state,user-modify-playback-state,user-read-private'
 
