@@ -3,4 +3,3 @@ spotipy
 requests
 spotipy
 IPython
-urllib
