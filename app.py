@@ -32,7 +32,8 @@ token_info = None #sp_oauth.get_cached_token()
 if not token_info:
     if st.button("Log in with Spotify"):
         auth_url = sp_oauth.get_authorize_url()
-        st.write(f"Please log in to Spotify using this URL: {auth_url}")
+        st.write("Please log in to Spotify using the following link:")
+        st.markdown(f"<a href='{auth_url}' target='_blank'>Log in with Spotify</a>", unsafe_allow_html=True)
         response_url = st.text_input("Enter the URL you were redirected to:")
         code = sp_oauth.parse_response_code(response_url)
         token_info = sp_oauth.get_access_token(code)
