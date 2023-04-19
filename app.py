@@ -11,7 +11,8 @@ from IPython.display import display, Javascript
 from urllib.parse import quote
 
 
-
+client_id = 'fe29fbb9fa7f4cf4b88ebf90faaeb562'
+client_secret = '4a50ecae553e45d8b80f0cb1a3fe92d9'
 
 # Set page configuration
 st.set_page_config(
@@ -20,40 +21,23 @@ st.set_page_config(
     layout="wide"
 )
 
-import os
-
-# Delete cache file if it exists
-cache_path = f".cache-{client_id}"
-if os.path.exists(cache_path):
-    os.remove(cache_path)
-    
-client_id = 'fe29fbb9fa7f4cf4b88ebf90faaeb562'
-client_secret = '4a50ecae553e45d8b80f0cb1a3fe92d9'
-
 #client_credentials_manager = SpotifyClientCredentials(client_id='fe29fbb9fa7f4cf4b88ebf90faaeb562', client_secret='4a50ecae553e45d8b80f0cb1a3fe92d9')
 #sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 redirect_uri = 'https://barto-official-streamlit-app-l7dta8.streamlit.app'
 scope = 'user-read-playback-state,user-modify-playback-state,user-read-private'
 
-# Authenticate with Spotify API
 sp_oauth = SpotifyOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri, scope=scope)
-token_info = sp_oauth.get_cached_token()
+token_info = None #sp_oauth.get_cached_token()
 if not token_info:
-    if st.button("Log in with Spotify"):
-        auth_url = sp_oauth.get_authorize_url()
-        st.write(f"Please log in to Spotify using this URL: {auth_url}")
-        response_url = st.text_input("Enter the URL you were redirected to:")
-        code = sp_oauth.parse_response_code(response_url)
-        token_info = sp_oauth.get_access_token(code)
-
-        # Save the token information in cache
-        sp_oauth.cache_path = ".spotifycache"
-        sp_oauth.save_token_info(token_info)
+    auth_url = sp_oauth.get_authorize_url()
+    st.write(f"Please log in to Spotify using this URL: {auth_url}")
+    response_url = st.text_input("Enter the URL you were redirected to:")
+    code = sp_oauth.parse_response_code(response_url)
+    token_info = sp_oauth.get_access_token(code)
 
 access_token = token_info['access_token']
 
-# Initialize Spotipy client with access token
 sp = spotipy.Spotify(auth=access_token)
 
 
