@@ -41,7 +41,6 @@ if not token_info:
         access_token = token_info['access_token']
         sp = spotipy.Spotify(auth=access_token)
 
-access_token = token_info['access_token']
 
 sp = spotipy.Spotify(auth=access_token)
 
