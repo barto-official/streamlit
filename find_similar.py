@@ -3,14 +3,15 @@ import pandas as pd
 
 
 def load_embeddings():
-    item_factors = np.load('item_factors.npy')
-    item_biases = np.load('item_biases.npy')
-    return item_factors, item_biases
+    item_factors = np.load('item_factors1.npy')
+    item_biases = np.load('item_biases1.npy')
+    item_lookup = pd.read_csv('item_lookup1.csv', index_col=[0])
+    return item_factors, item_biases, item_lookup
 
 
 def find_similar_artists(artist=None, num_items=10, item_lookup=None, item_factors=None, item_biases=None):
-    if item_factors is None or item_biases is None:
-        item_factors, item_biases = load_embeddings()
+    if item_factors is None or item_biases is None or item_lookup is None:
+        item_factors, item_biases, item_lookup = load_embeddings()
 
     # Get the item id for the given artist
     item_id = int(item_lookup[item_lookup.artist_name == artist]['artist_id'])
@@ -30,7 +31,7 @@ def find_similar_artists(artist=None, num_items=10, item_lookup=None, item_facto
     artists, artist_scores = [], []
 
     for idx in top_indices:
-        artists.append(item_lookup.artist_name.loc[item_lookup.artist_id == str(idx)].iloc[0])
+        artists.append(item_lookup.artist_name.loc[item_lookup.artist_id == idx].iloc[0])
         artist_scores.append(scores[idx])
 
     similar = pd.DataFrame({'artist': artists, 'score': artist_scores})
