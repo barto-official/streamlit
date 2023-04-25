@@ -149,8 +149,9 @@ st.markdown('<div class="title">Spotify Artist Search</div>', unsafe_allow_html=
 # Get user input for artist name
 st.markdown('<div class="input-container">', unsafe_allow_html=True)
 artist_name = st.text_input("Enter artist name:")
-similar_artists = find_similar_artists(artist_name)
-st.markdown('</div>', unsafe_allow_html=True)
+if artist_name:
+    similar_artists = find_similar_artists(artist_name)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 for artist_name in similar_artists[1:]:
     if artist_name:
