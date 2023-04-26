@@ -1,7 +1,10 @@
-FROM python:3.10
-EXPOSE $PORT
+FROM python:3.8-slim
+
 WORKDIR /app
+
 COPY requirements.txt ./requirements.txt
-RUN pip3 install -r requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
 COPY . .
-CMD streamlit run app.py --server.port $PORT
+
+CMD ["streamlit", "run", "app.py"]
