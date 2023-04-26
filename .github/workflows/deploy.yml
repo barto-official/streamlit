@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to Heroku Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: registry.heroku.com
+        username: ${{ secrets.HEROKU_USERNAME }}
+        password: ${{ secrets.HEROKU_API_KEY }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: registry.heroku.com/song-recommender2023/web
+        build-args: |
+          PORT=8501
+
+    - name: Release to Heroku
+      run: |
+        curl https://cli-assets.heroku.com/install.sh | sh
+        heroku container:release web -a song-recommender2023
