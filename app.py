@@ -147,7 +147,7 @@ if artist_name:
     url = f"https://artists_api-1-g4538820.deta.app/find_similar_artists?artist={artist_name}&num_items={num_items}"
     headers = {
         "Content-Type": "application/json",
-        "X-API-Key": "voSxjkd8S7HVFiZ3bdkFzYQ5dtJYjYZ7"
+        "X-API-Key": os.environ["DETA_API"]
     }
 
     response = requests.get(url, headers=headers)
