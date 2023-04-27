@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import requests
 import spotipy
 import requests
 import spotipy.util as util
@@ -139,12 +140,22 @@ st.markdown('<div class="title">Spotify Artist Search</div>', unsafe_allow_html=
 # Get user input for artist name
 st.markdown('<div class="input-container">', unsafe_allow_html=True)
 artist_name = st.text_input("Enter artist name:")
+num_items=6
+
 artist_found = False
 if artist_name:
-    try:
-        similar_artists = find_similar_artists(artist_name, num_items=6)
+    url = f"https://artists_api-1-g4538820.deta.app/find_similar_artists?artist={artist_name}&num_items={num_items}"
+    headers = {
+        "Content-Type": "application/json",
+        "X-API-Key": "voSxjkd8S7HVFiZ3bdkFzYQ5dtJYjYZ7"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        similar_artists = response.json()
         artist_found = True
-    except:
+    else:
         st.write('No author found! Make sure to write the name correctly.')
         artist_found = False
 
