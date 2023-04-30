@@ -14,8 +14,8 @@ from IPython.display import display, Javascript
 from urllib.parse import quote
 
 
-client_id = os.environ["SPOTIFY_CLIENT_ID"]
-client_secret = os.environ["SPOTIFY_CLIENT_SECRET"]
+client_id = fe29fbb9fa7f4cf4b88ebf90faaeb562
+client_secret = 4a50ecae553e45d8b80f0cb1a3fe92d9
 
 # Set page configuration
 st.set_page_config(
